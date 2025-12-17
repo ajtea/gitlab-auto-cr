@@ -1,0 +1,49 @@
+# AI Code Review - GitLab CI Template
+# 
+# Použití v projektech:
+#
+# include:
+#   - project: 'tvoje-skupina/ai-code-review'
+#     file: 'gitlab-ci-template.yml'
+#
+# ai-code-review:
+#   extends: .ai-code-review
+#
+
+.ai-code-review:
+  stage: review
+  image: djvitto/claude-gitlab-auto-cr:latest
+  variables:
+    AI_PROVIDER: "auto"
+    REVIEW_LANGUAGE: "cs"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+    - when: never
+  allow_failure: true
+  tags: []  # přidej tagy pokud používáš specific runners
+
+# Varianta pro backend projekty (PHP/Laravel)
+.ai-code-review-backend:
+  extends: .ai-code-review
+  variables:
+    IGNORE_PATTERNS: "tests/,*.test.php,database/seeders/"
+
+# Varianta pro frontend projekty (Vue/React)
+.ai-code-review-frontend:
+  extends: .ai-code-review
+  variables:
+    IGNORE_PATTERNS: "*.test.ts,*.spec.ts,*.test.js,__tests__/"
+    REVIEW_EXTENSIONS: ".vue,.ts,.tsx,.js,.jsx"
+
+# Varianta s anglickými komentáři
+.ai-code-review-en:
+  extends: .ai-code-review
+  variables:
+    REVIEW_LANGUAGE: "en"
+
+# Levnější varianta (gpt-4o-mini)
+.ai-code-review-lite:
+  extends: .ai-code-review
+  variables:
+    OPENAI_MODEL: "gpt-4o-mini"
