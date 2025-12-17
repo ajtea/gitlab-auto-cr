@@ -8,18 +8,19 @@ Docker image pro automatický AI code review v GitLab CI/CD.
 
 ### 1. Build a push image do GitLab Registry
 
+# Aktualně nalezneš multiarch verzi na dockerhubu:  djvitto/claude-gitlab-auto-cr
 ```bash
 # Klonuj/stáhni tento adresář
-cd ai-code-review-docker
+cd gitlab-auto-cr
 
 # Login do GitLab Container Registry
 docker login registry.gitlab.com
 
 # Build image
-docker build -t registry.gitlab.com/TVOJE-SKUPINA/ai-code-review:latest .
+docker build -t u-name-it/ai-code-review:latest .
 
 # Push
-docker push registry.gitlab.com/TVOJE-SKUPINA/ai-code-review:latest
+docker push u-name-it/ai-code-review:latest
 ```
 
 ### 2. Nastav CI/CD Variables (na úrovni skupiny)
