@@ -2,13 +2,15 @@
 
 Docker image pro automatický AI code review v GitLab CI/CD.
 
+V projektu je přidána podpora pro Laravel, VueJs, Inertia
+
 **Výhoda:** Žádný kód v projektech - jen pár řádků v `.gitlab-ci.yml`.
 
 ## Quick Start
 
 ### 1. Build a push image do nejakeho docker registry (gitlab,dockerhub,etc.)
 
-# Aktualně nalezneš multiarch verzi na dockerhubu:  djvitto/claude-gitlab-auto-cr
+Aktualně nalezneš multiarch verzi na dockerhubu:  **djvitto/claude-gitlab-auto-cr**
 ```bash
 # Klonuj/stáhni tento adresář
 cd gitlab-auto-cr
